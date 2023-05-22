@@ -9,15 +9,7 @@ export default class UserController {
     try {
       console.log("...controller...");
 
-      const { name, email, password, isAdmin, status } = req.body;
-
-      const userData = {
-        name,
-        email,
-        password,
-        isAdmin,
-        status,
-      };
+      const userData= req.body;
 
       const user = await UserService.registerUser(userData);
 

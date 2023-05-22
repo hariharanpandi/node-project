@@ -55,4 +55,5 @@ export const getAllUsers=()=>User.find({ status: 'Active' });
 // Create User
 export const createUser=(values : Record<string, any>)=>new User(values).save().then((user)=>user.toObject());
 
-
+// Find user By Email
+export const findByEmail=(email: string)=>User.findOne({ email });

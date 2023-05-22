@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { User } from "../models/user";
+import { User,findByEmail } from "../models/user";
 import jwt from "jsonwebtoken";
 
 class UserService {
@@ -12,7 +12,7 @@ class UserService {
         throw new Error("All fields are mandatory!");
       }
 
-      const userAvailable = await User.findOne({ email });
+      const userAvailable = await findByEmail( email );
       if (userAvailable) {
         throw new Error("User already registered!");
       }
@@ -36,7 +36,7 @@ class UserService {
   async loginUser(userData: any) {
     try {
       const { email, password } = userData;
-      const user = await User.findOne({ email });
+      const user = await findByEmail( email );
 
       if (user && (await bcrypt.compare(password, user.password))) {
         const accessToken = jwt.sign(
