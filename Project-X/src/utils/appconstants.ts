@@ -5,6 +5,7 @@ export default class AppConstants {
 
   TOKEN = {
     PERFIX_TOKEN: "Bearer",
+    SPLIT:" "
   };
 
   SCHEMA = {

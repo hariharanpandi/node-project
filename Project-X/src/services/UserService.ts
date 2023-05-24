@@ -3,12 +3,13 @@ import { User, findByEmail, generateAuthToken } from "../models/user";
 import AppConstants from "../utils/appconstants";
 
 const appConstant = new AppConstants();
-class UserService {
+export default class UserService {
   //-----------------------------Create Users---------------------------------------
-  async registerUser(userData: any) {
+  async registerUser(userData: Record<string, any>):Promise<Record<string, any>> {
     try {
       const { name, email, password, isAdmin, status } = userData;
-      if (!name || !email || !password || !isAdmin) {
+      const mandatoryFields = [name, email, password, isAdmin];
+      if (!mandatoryFields.every((field) => field)) {
         throw new Error(appConstant.ERROR_MESSAGES.MANDATORY_FIELD_MISSING);
       }
       const userAvailable = await findByEmail(email);
@@ -29,7 +30,7 @@ class UserService {
     }
   }
   //-----------------------------Login User---------------------------------------
-  async loginUser(userData: any) {
+  async loginUser(userData: Record<string, any>): Promise<Object>{
     try {
       const { email, password } = userData;
       const user = await findByEmail(email);
@@ -54,4 +55,4 @@ class UserService {
     }
   }
 }
-export default new UserService();
+

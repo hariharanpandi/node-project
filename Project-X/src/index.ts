@@ -5,7 +5,6 @@ import AppConstants from "./utils/appconstants";
 import Database from "./database/db";
 require("dotenv").config();
 import winston from "winston";
-import mongoose from "mongoose";
 //Import all Routes
 const routes = require("./routes/routes");
 const appConstant=new AppConstants();
