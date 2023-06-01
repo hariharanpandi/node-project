@@ -10,6 +10,6 @@ const signinUser = new SigninController();
 router.post('/tenant/create', signinUser.tenantRegister);
 router.post('/signin', signinUser.loginUser);
 router.post('/user/create', signinUser.userRegister);
-router.delete('/tenant/delete',signinUser.tenantDelete);
+router.delete('/tenant/delete', signinUser.tenantDelete);
 
 module.exports.route = router;

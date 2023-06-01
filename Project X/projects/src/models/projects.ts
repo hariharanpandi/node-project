@@ -58,7 +58,7 @@ const projectSchema: Schema<IProject> = new mongoose.Schema({
         select: false,
         default: new Date()
     },
-}, { collection: appConstant.SCHEMA.PROJECT_COLLEECTION_NAME });
+}, { collection: appConstant.SCHEMA.PROJECT_COLLECTION_NAME });
 
 
 // Create Project

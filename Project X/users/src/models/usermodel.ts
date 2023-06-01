@@ -1,7 +1,7 @@
 import mongoose, { Document, Schema } from "mongoose";
 import { ObjectId } from "mongodb";
 import AppConstants from "../utils/constant";
-import  jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 require('dotenv').config();
 
 const appConstant = new AppConstants();
@@ -23,19 +23,19 @@ interface IUser extends Document {
     generateAuthToken: () => string;
 }
 const userSchema: Schema<IUser> = new Schema({
-    tenant_id:{
+    tenant_id: {
         type: ObjectId,
         required: true,
         minlength: 5,
         maxlength: 50
     },
-    tenant_group_id:{
+    tenant_group_id: {
         type: ObjectId,
         required: true,
         minlength: 5,
         maxlength: 50
     },
-    domain_name:{
+    domain_name: {
         type: String,
         required: true,
         minlength: 1,
@@ -57,8 +57,7 @@ const userSchema: Schema<IUser> = new Schema({
         type: String,
         required: true,
         minlength: 5,
-        maxlength: 255,
-        unique: true
+        maxlength: 255
     },
     password: {
         type: String,
@@ -116,16 +115,30 @@ export const generateAuthToken = (userData: any) => jwt.sign(
     `${process.env.SECRET_KEY}`
 )
 // Find All User
-export const findAllUser = (status: string) => User.find({ status });
+export const findAllUser = (status: string) => User.find({ status }).then((user) => {
+    if (!user) {
+        return null;
+    }
+    return user;
+}).catch((error: any) => {
+    return null;
+});
 // Find By Email
-export const findByEmail = (email: string) => User.findOne({ email });
+export const findByEmail = (email: string) => User.findOne({ email, status: appConstant.SCHEMA.STATUS_ACTIVE }).then((user) => {
+    if (!user) {
+        return null;
+    }
+    return user;
+}).catch((error: any) => {
+    return null;
+});
 // Find project by _id
 export const findById = (_id: string) => User.findOne({ _id }).then((teantuser) => {
     if (!teantuser) {
         return null;
     }
     return teantuser;
-}).catch((error) => {
+}).catch((error: any) => {
     return null;
 });
 // Delete User

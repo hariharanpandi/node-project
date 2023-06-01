@@ -61,9 +61,7 @@ const tenantSchema: Schema<IUser> = new Schema({
     },
     user_id: {
         type: ObjectId,
-        required: true,
-        minlength: 5,
-        maxlength: 50
+        default: null
     },
     onboard_on: {
         type: Date,
@@ -110,10 +108,8 @@ const Tenant = mongoose.model<IUser>('Tenant', tenantSchema);
 export { Tenant, tenantSchema };
 // Tenant create
 export const tenantCreate = (values: Record<string, any>) => new Tenant(values).save().then((tenant) => tenant.toObject());
-// Find By Email
-export const findByEmailTenant = (email: string) => Tenant.findOne({ email });
-
-export const findByIdTenant = (_id: string) => Tenant.findOne({ _id }).then((teant) => {
+// Get tenant by email
+export const findByEmailTenant = (email: string) => Tenant.findOne({ email, status: appConstant.SCHEMA.STATUS_ACTIVE }).then((teant) => {
     if (!teant) {
         return null;
     }
@@ -121,5 +117,24 @@ export const findByIdTenant = (_id: string) => Tenant.findOne({ _id }).then((tea
 }).catch((error) => {
     return null;
 });
-// Delete User
+// Find tenant by _id 
+export const findByIdTenant = (_id: string) => Tenant.findOne({ _id, status: appConstant.SCHEMA.STATUS_ACTIVE }).then((tenant) => {
+    if (!tenant) {
+        return null;
+    }
+    return tenant;
+}).catch((error) => {
+    return null;
+});
+// Delete tenant by _id
 export const deleteTenant = (_id: string) => Tenant.findByIdAndUpdate(_id, { $set: { status: appConstant.SCHEMA.STATUS_INACTIVE, offboard_on: new Date() } });
+// Update tenant user_id 
+export const updateTenantUserId = (_id: string, userid: string) =>
+    Tenant.findOneAndUpdate({ _id: _id }, { $set: { user_id: userid } }, { new: true }).then((tenantResponse) => {
+        if (!tenantResponse) {
+            return null;
+        }
+        return tenantResponse;
+    }).catch((error) => {
+        return null;
+    });;

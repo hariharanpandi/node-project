@@ -24,7 +24,7 @@ connections
     .catch((error: any) => { console.error(appConstant.DBCONNECTION.UNSUCCESSFUL, error); });
 
 //Over All routes
-app.use('/api', routes.route);
+app.use(`${process.env.BASE_URL}`, routes.route);
 
 app.listen(port, () => {
     console.log(appConstant.MESSAGES.PORT_LISTEN + `${port}`);

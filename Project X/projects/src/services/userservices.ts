@@ -21,8 +21,7 @@ export default class ProjectService {
             });
             return userList
         } catch (error: any) {
-            // Handle errors
-            console.error('Error:', error.message);
+            throw new Error(error.message);
         }
     }
 }

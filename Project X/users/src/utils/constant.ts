@@ -20,8 +20,11 @@ export default class AppConstants {
     UNAUTHORIZED_USER: "User is not authorized",
     INVALID_TOKEN: "Invalid token",
     PORT_LISTEN: "Server running on port ",
-    USER_NOT_FOUND: "User not found",
     DELETE_USER: "user deleted",
+    TENANT_DELETED: "Tenant deleted",
+    OR: " (or) ",
+    EMPTY_SPACE: " ",
+    PASSWORD: "password"
   };
 
   DBCONNECTION = {
@@ -33,7 +36,13 @@ export default class AppConstants {
     INVALID_EMAIL_OR_PASSWORD: "Email or password is not valid",
     EXISTING_USER: "User already registered!",
     MANDATORY_FIELD_MISSING: "All fields are mandatory!",
-    DUPLICATE: "Duplicate records found"
+    DUPLICATE: "Duplicate records found",
+    USER_INACTIVE: "User has been expired",
+    TENANT_INACTIVE: "Tenant has been expired",
+    USER_NOT_FOUND: "User not found",
+    TENANT_NOT_FOUND: "Tenant not found",
+    TENANT_NOT_FOUND_EXPIRED: "Tenant has been expired or Tenant not found",
+    TENANT_USER_NOT_FOUND: "Tenant or user unavailable"
   };
 
 }

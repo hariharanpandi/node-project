@@ -6,6 +6,7 @@ require('dotenv').config();
 const appConstant = new AppConstants();
 
 export default class AuthGuard {
+
   async validateToken(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
       const authHeader: string | undefined = req.headers.authorization;

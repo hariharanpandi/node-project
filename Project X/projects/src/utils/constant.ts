@@ -11,7 +11,7 @@ export default class AppConstants {
     STATUS_ACTIVE: "Active",
     STATUS_INACTIVE: "Inactive",
     TOKEN_EXPIRE_TIME: "20m",
-    PROJECT_COLLEECTION_NAME: "projects",
+    PROJECT_COLLECTION_NAME: "projects",
   };
 
   MESSAGES = {

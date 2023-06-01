@@ -3,6 +3,7 @@ import AppConstants from "../utils/constant";
 
 const appConstant = new AppConstants();
 export default class Validation {
+
     project = Joi.object({
         project_name: Joi.string().trim().min(1).max(50).required().label('project_name'),
         description: Joi.string().trim().min(5).max(255).required().label('description'),
