@@ -10,8 +10,8 @@ export default class AppConstants {
   SCHEMA = {
     STATUS_ACTIVE: "Active",
     STATUS_INACTIVE: "Inactive",
-    USERS_COLLEECTION_NAME: "register_users",
-    PROJECT_USERS_COLLEECTION_NAME: "project_user",
+    USERS_COLLECTION_NAME: "register_users",
+    TENANT_COLLECTION_NAME: "tenant",
     TOKEN_EXPIRE_TIME: "20m",
   };
 
@@ -20,6 +20,8 @@ export default class AppConstants {
     UNAUTHORIZED_USER: "User is not authorized",
     INVALID_TOKEN: "Invalid token",
     PORT_LISTEN: "Server running on port ",
+    USER_NOT_FOUND: "User not found",
+    DELETE_USER: "user deleted",
   };
 
   DBCONNECTION = {

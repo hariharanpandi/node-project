@@ -3,15 +3,13 @@ import AppConstants from "../utils/constant";
 
 const appConstant = new AppConstants();
 export default class Validation {
-
-    schema = Joi.object({
-        name: Joi.string().min(5).required(),
-        age: Joi.number().required()
-    })
-
     project = Joi.object({
-        projectname: Joi.string().min(1).max(50).required().label('projectname'),
-        description: Joi.string().min(5).max(255).required().label('description'),
-        status: Joi.string().allow(appConstant.SCHEMA.STATUS_ACTIVE, appConstant.SCHEMA.STATUS_INACTIVE).label('status')
+        project_name: Joi.string().trim().min(1).max(50).required().label('project_name'),
+        description: Joi.string().trim().min(5).max(255).required().label('description'),
+        status: Joi.string().allow(appConstant.SCHEMA.STATUS_ACTIVE, appConstant.SCHEMA.STATUS_INACTIVE).label('status'),
+        created_by: Joi.string().trim().min(1).max(50).required().label('created_by'),
+        created_at: Joi.string().min(1).max(50).label('created_at'),
+        last_accessed_by: Joi.string().trim().min(1).max(50).required().label('last_accessed_by'),
+        last_accessed_at: Joi.string().min(1).max(50).label('last_accessed_at'),
     });
 }

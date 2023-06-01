@@ -42,7 +42,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema({
         enum: [appConstant.SCHEMA.STATUS_ACTIVE, appConstant.SCHEMA.STATUS_INACTIVE],
         default: 'Active'
     }
-}, { collection: appConstant.SCHEMA.USERS_COLLEECTION_NAME });
+}, { collection: appConstant.SCHEMA.USERS_COLLECTION_NAME });
 
 export const generateAuthToken = function (userData: any) {
     return jwt.sign(

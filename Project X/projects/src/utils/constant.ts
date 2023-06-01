@@ -19,6 +19,8 @@ export default class AppConstants {
     UNAUTHORIZED_USER: "User is not authorized",
     INVALID_TOKEN: "Invalid token",
     PORT_LISTEN: "Server running on port ",
+    DELETE_PROJECT: "project deleted successfully",
+    PROJECT_NOT_FOUND: "project not found",
   };
 
   DBCONNECTION = {
@@ -30,7 +32,7 @@ export default class AppConstants {
     INVALID_EMAIL_OR_PASSWORD: "Email or password is not valid",
     EXISTING_USER: "User already registered!",
     MANDATORY_FIELD_MISSING: "All fields are mandatory!",
-    DUPLICATE: "Duplicate records found"
+    DUPLICATE: "project name already exists"
   };
 
 }
