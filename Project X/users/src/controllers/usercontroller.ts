@@ -9,9 +9,9 @@ const appConstant = new AppConstants();
 
 export default class SigninController {
 
-    /*
-        The function below is used for the User register functionality
-    */
+    /**
+     * The function below is used for the User register functionality
+     */
     async userRegister(req: Request, res: Response): Promise<void> {
         try {
             const userData = req.body;
@@ -32,10 +32,9 @@ export default class SigninController {
             res.status(400).send(error.message);
         }
     }
-
-    /*
-        The below function is used for login functionality
-    */
+    /**
+     * The below function is used for login functionality
+     */
     async loginUser(req: Request, res: Response): Promise<void> {
         try {
             const { email, password } = req.body;
@@ -50,9 +49,9 @@ export default class SigninController {
             res.status(401).send(error.message);
         }
     }
-    /*
-        The function below is used for the Tenant and Tenant_User register functionality
-    */
+    /**
+     * The function below is used for the Tenant and Tenant_User register functionality
+     */
     async tenantRegister(req: Request, res: Response): Promise<void> {
         try {
             const tenantData = req.body;
@@ -67,9 +66,9 @@ export default class SigninController {
             res.status(400).send(error.message);
         }
     }
-    /*
-        The below function is used for deleting Tenant functionality
-    */
+    /**
+     * The below function is used for deleting Tenant functionality
+     */
     async tenantDelete(req: Request, res: Response): Promise<void> {
         try {
             const query = JSON.parse(JSON.stringify(req.query));

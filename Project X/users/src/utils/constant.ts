@@ -10,8 +10,9 @@ export default class AppConstants {
   SCHEMA = {
     STATUS_ACTIVE: "Active",
     STATUS_INACTIVE: "Inactive",
-    USERS_COLLECTION_NAME: "register_users",
+    USERS_COLLECTION_NAME: "users",
     TENANT_COLLECTION_NAME: "tenant",
+    TENANT_GROUP_COLLECTION: "tenant_group",
     TOKEN_EXPIRE_TIME: "20m",
   };
 
@@ -20,8 +21,8 @@ export default class AppConstants {
     UNAUTHORIZED_USER: "User is not authorized",
     INVALID_TOKEN: "Invalid token",
     PORT_LISTEN: "Server running on port ",
-    DELETE_USER: "user deleted",
-    TENANT_DELETED: "Tenant deleted",
+    DELETE_USER: "user deleted successfully",
+    TENANT_DELETED: "Tenant deleted successfully",
     OR: " (or) ",
     EMPTY_SPACE: " ",
     PASSWORD: "password"
@@ -35,6 +36,7 @@ export default class AppConstants {
   ERROR_MESSAGES = {
     INVALID_EMAIL_OR_PASSWORD: "Email or password is not valid",
     EXISTING_USER: "User already registered!",
+    EXISTING_TENANT: "Tenant already registered!",
     MANDATORY_FIELD_MISSING: "All fields are mandatory!",
     DUPLICATE: "Duplicate records found",
     USER_INACTIVE: "User has been expired",

@@ -8,9 +8,9 @@ const appConstant = new AppConstants();
 
 export default class UserService {
 
-    /*
-        User registration and password registration in basic format 64
-    */
+    /**
+     * User registration and password registration in basic format 64
+     */
     async registerUser(userData: Record<string, any>): Promise<Record<string, any>> {
         try {
             const { tenant_id,
@@ -51,9 +51,9 @@ export default class UserService {
             throw new Error(error.message);
         }
     }
-    /*
-        Login the user and verify the tenant is active, then only allow the user to login and generate a token.
-    */
+    /**
+     * Login the user and verify the tenant is active, then only allow the user to login and generate a token.
+     */
     async loginUser(userData: Record<string, any>): Promise<Record<string, any>> {
         try {
             const { email, password } = userData;
@@ -65,7 +65,7 @@ export default class UserService {
             if (!tenant) {
                 throw new Error(appConstant.ERROR_MESSAGES.TENANT_INACTIVE + appConstant.MESSAGES.OR + appConstant.ERROR_MESSAGES.TENANT_NOT_FOUND);
             }
-            if (user && (await bcrypt.compare(password, user.password))) {
+            if (user && await bcrypt.compare(password, user.password)) {
                 const accessToken = generateAuthToken(user);
                 return {
                     authDetails: {
@@ -85,9 +85,9 @@ export default class UserService {
             throw new Error(error.message);
         }
     }
-    /* 
-       Tenant and tenant_user creation
-    */
+    /**
+     * Tenant and tenant_user creation
+     */
     async tenantRegister(userData: Record<string, any>): Promise<Record<string, any>> {
         try {
             const {
@@ -101,17 +101,16 @@ export default class UserService {
                 status,
                 created_by,
                 last_accessed_by,
-                tenant_group_name,
                 org_name } = userData;
-            const [userExists, tenantExists] = await Promise.all([findByEmail(email), findByEmailTenant(email)]);
-            if (userExists && (userExists.status === appConstant.SCHEMA.STATUS_ACTIVE) || tenantExists && (tenantExists.status === appConstant.SCHEMA.STATUS_ACTIVE)) {
-                throw new Error(appConstant.ERROR_MESSAGES.EXISTING_USER);
+            const userExists = await findByEmail(email);
+            if (!_.isNil(userExists) && (userExists.status === appConstant.SCHEMA.STATUS_ACTIVE)) {
+                const tenantExists = await findByIdTenant(userExists.tenant_id);
+                if (tenantExists && tenantExists.status === appConstant.SCHEMA.STATUS_ACTIVE) {
+                    throw new Error(appConstant.ERROR_MESSAGES.EXISTING_TENANT);
+                }
             }
             const tenant: any = await tenantCreate({
-                first_name,
-                last_name,
-                email,
-                tenant_group_name,
+                tenant_group_id,
                 org_name,
                 domain_name,
                 created_by,
@@ -137,15 +136,15 @@ export default class UserService {
             throw new Error(error.message);
         }
     }
-    /* 
-       Tenant and tenant_user soft delete
+    /**
+     * Tenant and tenant_user soft delete
      */
     async tenantDelete(params: Record<string, any>): Promise<void> {
         try {
             const { tenant_id } = params;
             const tenant = await findByIdTenant(tenant_id);
             if (!tenant) {
-                throw new Error(appConstant.ERROR_MESSAGES.USER_NOT_FOUND);
+                throw new Error(appConstant.ERROR_MESSAGES.TENANT_NOT_FOUND);
             }
             await deleteUser(tenant.user_id.toString());
             await deleteTenant(tenant_id);

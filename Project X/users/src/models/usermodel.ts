@@ -1,5 +1,4 @@
 import mongoose, { Document, Schema } from "mongoose";
-import { ObjectId } from "mongodb";
 import AppConstants from "../utils/constant";
 import jwt from "jsonwebtoken";
 require('dotenv').config();
@@ -7,30 +6,30 @@ require('dotenv').config();
 const appConstant = new AppConstants();
 
 interface IUser extends Document {
-    tenant_id: ObjectId,
-    tenant_group_id: ObjectId,
-    domain_name: String,
+    tenant_id: string,
+    tenant_group_id: string,
+    domain_name: string,
     first_name: string,
     last_name: string,
     email: string,
     password: string,
     last_active: Date,
     status: 'Active' | 'Inactive',
-    created_by: String,
+    created_by: string,
     created_at: Date,
-    last_accessed_by: String,
+    last_accessed_by: string,
     last_accessed_at: Date,
     generateAuthToken: () => string;
 }
 const userSchema: Schema<IUser> = new Schema({
     tenant_id: {
-        type: ObjectId,
+        type: String,
         required: true,
         minlength: 5,
         maxlength: 50
     },
     tenant_group_id: {
-        type: ObjectId,
+        type: String,
         required: true,
         minlength: 5,
         maxlength: 50
@@ -104,7 +103,9 @@ const userSchema: Schema<IUser> = new Schema({
 const User = mongoose.model<IUser>('User', userSchema);
 
 export { User, userSchema };
-// Generate Auth Token
+/**
+ * Generate auth token
+ */
 export const generateAuthToken = (userData: any) => jwt.sign(
     {
         id: userData._id,
@@ -113,8 +114,10 @@ export const generateAuthToken = (userData: any) => jwt.sign(
         isAdmin: userData.isAdmin ? userData.isAdmin : false,
     },
     `${process.env.SECRET_KEY}`
-)
-// Find All User
+);
+/**
+ * Find all active user
+ */
 export const findAllUser = (status: string) => User.find({ status }).then((user) => {
     if (!user) {
         return null;
@@ -123,7 +126,9 @@ export const findAllUser = (status: string) => User.find({ status }).then((user)
 }).catch((error: any) => {
     return null;
 });
-// Find By Email
+/**
+ * Find user by email
+ */
 export const findByEmail = (email: string) => User.findOne({ email, status: appConstant.SCHEMA.STATUS_ACTIVE }).then((user) => {
     if (!user) {
         return null;
@@ -132,7 +137,9 @@ export const findByEmail = (email: string) => User.findOne({ email, status: appC
 }).catch((error: any) => {
     return null;
 });
-// Find project by _id
+/**
+ * Find project by _id
+ */
 export const findById = (_id: string) => User.findOne({ _id }).then((teantuser) => {
     if (!teantuser) {
         return null;
@@ -141,7 +148,11 @@ export const findById = (_id: string) => User.findOne({ _id }).then((teantuser) 
 }).catch((error: any) => {
     return null;
 });
-// Delete User
+/**
+ * Delete User by _id
+ */
 export const deleteUser = (_id: string) => User.findByIdAndUpdate(_id, { $set: { status: appConstant.SCHEMA.STATUS_INACTIVE } });
-// User Create
+/**
+ * User create
+ */
 export const userCreate = (values: Record<string, any>) => new User(values).save().then((user) => user.toObject());
