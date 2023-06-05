@@ -10,6 +10,8 @@ export default class AppConstants {
   SCHEMA = {
     STATUS_ACTIVE: "Active",
     STATUS_INACTIVE: "Inactive",
+    ADMIN_USER: "A",
+    NORMAL_USER: "N",
     USERS_COLLECTION_NAME: "users",
     TENANT_COLLECTION_NAME: "tenant",
     TENANT_GROUP_COLLECTION: "tenant_group",
@@ -46,7 +48,6 @@ export default class AppConstants {
     TENANT_NOT_FOUND: "Tenant not found",
     TENANT_NOT_FOUND_EXPIRED: "Tenant has been expired or Tenant not found",
     TENANT_USER_NOT_FOUND: "Tenant or user unavailable",
-    RECORD_NOT_FOUND:"Record not found"
+    RECORD_NOT_FOUND: "Record not found"
   };
-
 }

@@ -13,6 +13,7 @@ interface IUser extends Document {
     last_name: string,
     email: string,
     password: string,
+    user_type: 'A' | 'N' | 'S',
     last_active: Date,
     status: 'Active' | 'Inactive',
     created_by: string,
@@ -63,6 +64,11 @@ const userSchema: Schema<IUser> = new Schema({
         required: true,
         minlength: 6,
         maxlength: 1024
+    },
+    user_type:{
+        type: String,
+        enum:[appConstant.SCHEMA.ADMIN_USER, appConstant.SCHEMA.NORMAL_USER],
+        default: 'N'
     },
     last_active: {
         type: Date,

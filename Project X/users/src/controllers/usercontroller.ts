@@ -79,7 +79,7 @@ export default class SigninController {
         }
     }
     /**
-     * The function below is used for the get Terms of service and Privacy Policy
+     * The function below is used for the get Terms of service or Privacy Policy
      */
     async TermsofservicePrivacyPolicy(req: Request, res: Response): Promise<void> {
         try {

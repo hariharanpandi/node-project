@@ -15,13 +15,14 @@ export default class Validation {
         last_name: Joi.string().trim().min(1).max(50).required().label('last_name'),
         email: Joi.string().email().trim().required().label('email'),
         password: Joi.string().min(6).max(255).required().label('password'),
+        user_type: Joi.string().allow(appConstant.SCHEMA.ADMIN_USER, appConstant.SCHEMA.NORMAL_USER).label('user_type'),
         status: Joi.string().allow(appConstant.SCHEMA.STATUS_ACTIVE, appConstant.SCHEMA.STATUS_INACTIVE).label('status'),
         created_by: Joi.string().trim().min(1).max(50).required().label('created_by'),
         last_accessed_by: Joi.string().trim().min(1).max(50).required().label('last_accessed_by')
     });
-/**
- * Defining validation schema for tenant registration
- */
+    /**
+     * Defining validation schema for tenant registration
+     */
     tenantRegister = Joi.object({
         first_name: Joi.string().trim().min(1).max(50).required().label('first_name'),
         last_name: Joi.string().trim().min(1).max(50).required().label('last_name'),
@@ -30,6 +31,7 @@ export default class Validation {
         org_name: Joi.string().trim().min(1).max(50).required().label('org_name'),
         domain_name: Joi.string().trim().min(1).max(50).required().label('domain_name'),
         user_id: Joi.string().trim().min(1).max(50).label('user_id'),
+        user_type: Joi.string().allow(appConstant.SCHEMA.ADMIN_USER, appConstant.SCHEMA.NORMAL_USER).label('user_type'),
         status: Joi.string().allow(appConstant.SCHEMA.STATUS_ACTIVE, appConstant.SCHEMA.STATUS_INACTIVE).label('status'),
         created_by: Joi.string().trim().min(1).max(50).required().label('created_by'),
         last_accessed_by: Joi.string().trim().min(1).max(50).required().label('last_accessed_by'),

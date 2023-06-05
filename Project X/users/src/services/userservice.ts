@@ -3,7 +3,7 @@ import { findByEmail, generateAuthToken, userCreate, findById, deleteUser } from
 import { findByEmailTenant, deleteTenant, tenantCreate, findByIdTenant, updateTenantUserId } from "../models/tenantmodel";
 import AppConstants from "../utils/constant";
 import _ from "lodash";
-import { findByPageUrl } from "../models/logincms";
+import { findByPageUrl } from "../models/logincmsmodel";
 
 const appConstant = new AppConstants();
 
@@ -154,7 +154,7 @@ export default class UserService {
         }
     }
     /**
-     * Tenant and tenant_user soft delete
+     * Get Terms-of-service or Privacy-policy
      */
     async TermsofservicePrivacyPolicy(params: Record<string, any>): Promise<Record<string, any>> {
         try {

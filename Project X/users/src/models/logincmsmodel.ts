@@ -61,7 +61,7 @@ const loginCmsSchema: Schema<IUser> = new Schema({
 const LoginCms = mongoose.model<IUser>('LoginCms', loginCmsSchema);
 export { LoginCms, loginCmsSchema };
 /**
- * 
+ * Find Terms-of-service or Privacy-policy by page_url
  */
 export const findByPageUrl = (page_url: string) => LoginCms.findOne({ page_url }).then((data) => {
     if (!data) {
