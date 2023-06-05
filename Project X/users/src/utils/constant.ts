@@ -13,6 +13,7 @@ export default class AppConstants {
     USERS_COLLECTION_NAME: "users",
     TENANT_COLLECTION_NAME: "tenant",
     TENANT_GROUP_COLLECTION: "tenant_group",
+    LOGIN_CMS_COLLECTION: "login_cms",
     TOKEN_EXPIRE_TIME: "20m",
   };
 
@@ -44,7 +45,8 @@ export default class AppConstants {
     USER_NOT_FOUND: "User not found",
     TENANT_NOT_FOUND: "Tenant not found",
     TENANT_NOT_FOUND_EXPIRED: "Tenant has been expired or Tenant not found",
-    TENANT_USER_NOT_FOUND: "Tenant or user unavailable"
+    TENANT_USER_NOT_FOUND: "Tenant or user unavailable",
+    DATA_NOT_FOUND:"Data not found"
   };
 
 }

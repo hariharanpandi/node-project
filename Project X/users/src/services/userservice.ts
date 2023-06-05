@@ -3,6 +3,7 @@ import { findByEmail, generateAuthToken, userCreate, findById, deleteUser } from
 import { findByEmailTenant, deleteTenant, tenantCreate, findByIdTenant, updateTenantUserId } from "../models/tenantmodel";
 import AppConstants from "../utils/constant";
 import _ from "lodash";
+import { findByPageUrl } from "../models/logincms";
 
 const appConstant = new AppConstants();
 
@@ -148,6 +149,21 @@ export default class UserService {
             }
             await deleteUser(tenant.user_id.toString());
             await deleteTenant(tenant_id);
+        } catch (error: any) {
+            throw new Error(error.message);
+        }
+    }
+    /**
+     * Tenant and tenant_user soft delete
+     */
+    async TermsofservicePrivacyPolicy(params: Record<string, any>): Promise<Record<string, any>> {
+        try {
+            const { page_url } = params;
+            const data = await findByPageUrl(page_url);
+            if (!data) {
+                throw new Error(appConstant.ERROR_MESSAGES.DATA_NOT_FOUND);
+            }
+            return data;
         } catch (error: any) {
             throw new Error(error.message);
         }

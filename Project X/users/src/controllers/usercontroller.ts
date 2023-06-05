@@ -78,4 +78,16 @@ export default class SigninController {
             res.status(404).send(error.message);
         }
     }
+    /**
+     * The function below is used for the get Terms of service and Privacy Policy
+     */
+    async TermsofservicePrivacyPolicy(req: Request, res: Response): Promise<void> {
+        try {
+            const query = JSON.parse(JSON.stringify(req.query));
+            const responseData = await userService.TermsofservicePrivacyPolicy(query);
+            res.status(200).send(responseData);
+        } catch (error: any) {
+            res.status(404).send(error.message);
+        }
+    }
 }
