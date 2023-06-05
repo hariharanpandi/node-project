@@ -46,7 +46,7 @@ export default class AppConstants {
     TENANT_NOT_FOUND: "Tenant not found",
     TENANT_NOT_FOUND_EXPIRED: "Tenant has been expired or Tenant not found",
     TENANT_USER_NOT_FOUND: "Tenant or user unavailable",
-    DATA_NOT_FOUND:"Data not found"
+    RECORD_NOT_FOUND:"Record not found"
   };
 
 }

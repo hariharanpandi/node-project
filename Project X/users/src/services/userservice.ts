@@ -161,7 +161,7 @@ export default class UserService {
             const { page_url } = params;
             const data = await findByPageUrl(page_url);
             if (!data) {
-                throw new Error(appConstant.ERROR_MESSAGES.DATA_NOT_FOUND);
+                throw new Error(appConstant.ERROR_MESSAGES.RECORD_NOT_FOUND);
             }
             return data;
         } catch (error: any) {
